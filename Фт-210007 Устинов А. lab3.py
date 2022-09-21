@@ -18,7 +18,11 @@ while True:
                 index = alphabet.index(string[i])
                 new_string+=alphabet[(index-num)%33]
             except ValueError:
-                new_string+=string[i]
+                try:
+                    index = alphabet.index(string[i].lower())
+                    new_string+=alphabet[(index-num)%33].upper()
+                except ValueError:
+                    new_string+=string[i]
         print('Расшифровка: '+ new_string + '\n')
     elif solution=='1':
         for i in range(len(string)):
@@ -26,7 +30,11 @@ while True:
                 index = alphabet.index(string[i])
                 new_string+=alphabet[(index+num)%33]
             except ValueError:
-                new_string+=string[i]
+                try:
+                    index = alphabet.index(string[i].lower())
+                    new_string+=alphabet[(index+num)%33].upper()
+                except ValueError:
+                    new_string+=string[i]
         print('Шифровка: '+new_string+'\n')
     else:
         print('Ошибка. Попробуйте еще раз\n')
