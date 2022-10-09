@@ -21,40 +21,43 @@ while True:
                 count+=1
         if count == len(string): #все символы в строке нерусские, выводится ошибка
             print ('Ошибка. Введите хотя бы 1 русский символ\n')
-            string = input('Введите строку на русском языке (другие символы не изменятся) или 0: ')
-    try: #обработка ввода
-        num = int(input('Введите целое число смещений по алфавиту: '))
-    except ValueError:
-        print('Ошибка ввода. Попробуйте еще раз')
-        continue
-    
-    solution = input('Для расшифровки введите -1, для шифровки 1:')
-    new_string=''
-    if solution=='-1':
-        for i in range(len(string)):
-            try:
-                index = alphabet.index(string[i]) #поиск индекса символа строки (если это буква)
-                new_string+=alphabet[(index-num)%33]
-                #внесение в новую строку закодированного символа (33-число букв в русском алфавите)
-            except ValueError:
+            continue
+    while True:
+        try: #обработка ввода
+            num = int(input('Введите целое число смещений по алфавиту: '))
+            break
+        except ValueError:
+            print('Ошибка ввода. Попробуйте еще раз')
+    while True:
+        solution = input('Для расшифровки введите -1, для шифровки 1:')
+        new_string=''
+        if solution=='-1':
+            for i in range(len(string)):
                 try:
-                    index = alphabet.index(string[i].lower()) #обработка ввода заглавной буквы
-                    new_string+=alphabet[(index-num)%33].upper() #возврат регистра буквы
+                    index = alphabet.index(string[i]) #поиск индекса символа строки (если это буква)
+                    new_string+=alphabet[(index-num)%33]
+                    #внесение в новую строку закодированного символа (33-число букв в русском алфавите)
                 except ValueError:
-                    new_string+=string[i] #внесение символа не из русского алфавита
-        print('Расшифровка: '+ new_string + '\n')
-    elif solution=='1':
-        for i in range(len(string)):
-            try:
-                index = alphabet.index(string[i]) #поиск индекса символа строки (если это буква)
-                new_string+=alphabet[(index+num)%33]
-                #внесение в новую строку раскодированного символа (33-число букв в русском алфавите)
-            except ValueError:
+                    try:
+                        index = alphabet.index(string[i].lower()) #обработка ввода заглавной буквы
+                        new_string+=alphabet[(index-num)%33].upper() #возврат регистра буквы
+                    except ValueError:
+                        new_string+=string[i] #внесение символа не из русского алфавита
+            print('Расшифровка: '+ new_string + '\n')
+            break
+        elif solution=='1':
+            for i in range(len(string)):
                 try:
-                    index = alphabet.index(string[i].lower()) #обработка ввода заглавной буквы
-                    new_string+=alphabet[(index+num)%33].upper() #возврат регистра буквы
+                    index = alphabet.index(string[i]) #поиск индекса символа строки (если это буква)
+                    new_string+=alphabet[(index+num)%33]
+                    #внесение в новую строку раскодированного символа (33-число букв в русском алфавите)
                 except ValueError:
-                    new_string+=string[i] #внесение символа не из русского алфавита
-        print('Шифровка: '+new_string+'\n')
-    else:   #обработка ввода
-        print('Ошибка. Попробуйте еще раз\n')
+                    try:
+                        index = alphabet.index(string[i].lower()) #обработка ввода заглавной буквы
+                        new_string+=alphabet[(index+num)%33].upper() #возврат регистра буквы
+                    except ValueError:
+                        new_string+=string[i] #внесение символа не из русского алфавита
+            print('Шифровка: '+new_string+'\n')
+            break
+        else:   #обработка ввода
+            print('Ошибка. Попробуйте еще раз\n')
